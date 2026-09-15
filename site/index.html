@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="LOF 基金实时溢价率历史看板">
+  <title>LOF 溢价率监控</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23132445'/%3E%3Cpath d='M13 44 25 31l9 8 17-20' fill='none' stroke='%23ffa800' stroke-width='6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="shell">
+    <header class="hero">
+      <div>
+        <p class="eyebrow">LOF MARKET MONITOR</p>
+        <h1>LOF 溢价率监控</h1>
+        <p class="subtitle">交易时段每 30 分钟采集，跟踪高溢价和回落过程。</p>
+      </div>
+      <div class="freshness" aria-live="polite">
+        <span id="status-dot" class="status-dot"></span>
+        <div>
+          <span class="label">最新快照</span>
+          <strong id="updated-at">加载中…</strong>
+        </div>
+      </div>
+    </header>
+
+    <section class="metrics" aria-label="市场概览">
+      <article class="metric">
+        <span>基金数量</span>
+        <strong id="fund-count">--</strong>
+        <small>当前快照</small>
+      </article>
+      <article class="metric">
+        <span>正溢价</span>
+        <strong id="positive-count">--</strong>
+        <small id="positive-ratio">--</small>
+      </article>
+      <article class="metric hot">
+        <span>最高溢价率</span>
+        <strong id="max-premium">--</strong>
+        <small id="max-premium-name">--</small>
+      </article>
+      <article class="metric">
+        <span>中位溢价率</span>
+        <strong id="median-premium">--</strong>
+        <small>当前全部基金</small>
+      </article>
+    </section>
+
+    <section class="panel trend-panel">
+      <div class="panel-heading">
+        <div>
+          <p class="section-kicker">历史走势</p>
+          <h2 id="chart-title">选择基金查看走势</h2>
+        </div>
+        <label class="fund-picker">
+          <span>跟踪基金</span>
+          <select id="fund-select" aria-label="选择走势基金"></select>
+        </label>
+      </div>
+      <div class="range-controls" role="group" aria-label="历史走势时间范围">
+        <button type="button" data-range="1">当日</button>
+        <button type="button" data-range="5">最近 5 个交易日</button>
+        <button type="button" data-range="20">最近 20 个交易日</button>
+        <button type="button" data-range="60" class="active" aria-pressed="true">最近 60 个交易日</button>
+        <button type="button" data-range="all">全部历史</button>
+      </div>
+      <div id="chart-wrap" class="chart-wrap">
+        <svg id="trend-chart" role="img" aria-labelledby="chart-title chart-desc"></svg>
+        <p id="chart-desc" class="sr-only">基金溢价率历史折线图</p>
+        <div id="chart-empty" class="empty" hidden>需要至少两个快照才能形成走势线。</div>
+      </div>
+      <div class="chart-meta">
+        <span id="chart-range">--</span>
+        <span id="chart-latest">--</span>
+      </div>
+      <p id="history-note" class="history-note">最近 60 个交易日保留每 30 分钟快照；更早历史按每日最后一个快照压缩保存。</p>
+      <section class="source-accuracy" aria-labelledby="source-title">
+        <div class="source-heading">
+          <div>
+            <p class="section-kicker">昨日评估</p>
+            <h3 id="source-title">今日采用的数据源</h3>
+          </div>
+          <div id="best-source" class="source-best">--</div>
+        </div>
+        <p id="source-note" class="source-note">加载昨日数据源准确度…</p>
+        <div class="table-scroll">
+          <table class="source-table">
+            <thead>
+              <tr>
+                <th>来源</th>
+                <th class="num">昨日模拟涨幅</th>
+                <th class="num">昨日偏差</th>
+                <th class="num">近 1 月平均偏差</th>
+              </tr>
+            </thead>
+            <tbody id="source-body"></tbody>
+          </table>
+        </div>
+      </section>
+    </section>
+
+    <section class="panel ranking-panel">
+      <div class="panel-heading ranking-heading">
+        <div>
+          <p class="section-kicker">当前排名</p>
+          <h2>溢价率明细</h2>
+        </div>
+        <div class="filters">
+          <label>
+            <span class="sr-only">搜索基金</span>
+            <input id="search" type="search" placeholder="搜索代码或名称">
+          </label>
+          <label>
+            <span class="sr-only">基金分类</span>
+            <select id="category-filter">
+              <option value="all">全部类别</option>
+              <option value="stock">股票</option>
+              <option value="index">指数</option>
+              <option value="oversea">海外</option>
+              <option value="apac">亚太</option>
+              <option value="commodity">商品</option>
+              <option value="other">其他</option>
+            </select>
+          </label>
+          <label class="check-filter">
+            <input id="positive-only" type="checkbox">
+            <span>仅看正溢价</span>
+          </label>
+        </div>
+      </div>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>基金</th>
+              <th>申购</th>
+              <th class="num">场外估值</th>
+              <th class="num">场内价</th>
+              <th class="num">今日数据源</th>
+              <th class="num">实时溢价率</th>
+            </tr>
+          </thead>
+          <tbody id="ranking-body"></tbody>
+        </table>
+      </div>
+      <p id="result-count" class="result-count" aria-live="polite"></p>
+    </section>
+
+    <footer>
+      <p>本页面为独立开发的非官方信息工具。数据经第三方公开行情接口自动采集、整理与计算，仅用于信息展示，不构成投资建议；估值与实际净值可能存在偏差。</p>
+    </footer>
+  </main>
+  <script src="app.js" defer></script>
+</body>
+</html>

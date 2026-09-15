@@ -1,0 +1,6 @@
+__pycache__/
+.DS_Store
+output/
+output-*/
+site/data/*.json
+site/data/trends/
