@@ -4,6 +4,8 @@ const state = {
   sourceAccuracy: null,
   selectedCode: null,
   selectedRange: "60",
+  sortKey: "premium_rate_pct",
+  sortDirection: "desc",
   trendCache: new Map(),
   chartRequest: 0,
 };
@@ -13,6 +15,10 @@ const fmtPct = (value) => value == null ? "--" : `${value >= 0 ? "+" : ""}${valu
 const fmtNum = (value, digits = 4) => value == null ? "--" : Number(value).toFixed(digits);
 const tone = (value) => value > 0 ? "up" : value < 0 ? "down" : "flat";
 const categoryName = { stock: "股票", index: "指数", oversea: "海外", overseas: "海外", apac: "亚太", commodity: "商品", other: "其他" };
+const sortName = {
+  market_rank: "原始排名", fund: "基金", purchase: "申购状态", off_market_value: "场外估值",
+  on_market_price: "场内价", source: "今日数据源", premium_rate_pct: "实时溢价率",
+};
 
 async function loadData() {
   const stamp = Date.now();
@@ -71,30 +77,91 @@ function filteredRows() {
   const query = $("#search").value.trim().toLowerCase();
   const category = $("#category-filter").value;
   const positiveOnly = $("#positive-only").checked;
-  return state.latest.rows.filter(row => {
+  const purchasableOnly = $("#purchasable-only").checked;
+  const rows = state.latest.rows.filter(row => {
     const matchesQuery = !query || row.code.includes(query) || row.name.toLowerCase().includes(query);
     const rowCategory = categoryName[row.category] ? row.category : "other";
-    return matchesQuery && (category === "all" || rowCategory === category) && (!positiveOnly || row.premium_rate_pct > 0);
+    return matchesQuery
+      && (category === "all" || rowCategory === category)
+      && (!positiveOnly || row.premium_rate_pct > 0)
+      && (!purchasableOnly || purchaseStatus(row).kind === "available");
+  });
+  return sortRows(rows);
+}
+
+function purchaseStatus(row) {
+  const label = String(row.purchase_info || "").trim();
+  if (!label || label === "开放申购") return { kind: "available", label: "开放申购", order: 0 };
+  if (/限/.test(label)) return { kind: "limited", label, order: 1 };
+  if (/暂停|不可|关闭|不开放/.test(label)) return { kind: "paused", label, order: 2 };
+  return { kind: "other", label, order: 3 };
+}
+
+function sortValue(row, key) {
+  const source = state.sourceAccuracy?.funds?.[row.code];
+  if (key === "market_rank") return state.latest.rows.indexOf(row);
+  if (key === "fund") return `${row.name}\u0000${row.code}`;
+  if (key === "purchase") return `${purchaseStatus(row).order}\u0000${purchaseStatus(row).label}`;
+  if (key === "source") return source?.best_source == null ? null : Number(source.best_source);
+  return row[key];
+}
+
+function compareValues(left, right) {
+  const leftMissing = left == null || Number.isNaN(left);
+  const rightMissing = right == null || Number.isNaN(right);
+  if (leftMissing || rightMissing) return leftMissing === rightMissing ? 0 : leftMissing ? 1 : -1;
+  if (typeof left === "string" || typeof right === "string") {
+    return String(left).localeCompare(String(right), "zh-CN", { numeric: true, sensitivity: "base" });
+  }
+  return left - right;
+}
+
+function sortRows(rows) {
+  const direction = state.sortDirection === "asc" ? 1 : -1;
+  return [...rows].sort((a, b) => {
+    const left = sortValue(a, state.sortKey);
+    const right = sortValue(b, state.sortKey);
+    const leftMissing = left == null || Number.isNaN(left);
+    const rightMissing = right == null || Number.isNaN(right);
+    if (leftMissing || rightMissing) return leftMissing === rightMissing ? a.code.localeCompare(b.code) : leftMissing ? 1 : -1;
+    const compared = compareValues(left, right);
+    return compared * direction || a.code.localeCompare(b.code);
+  });
+}
+
+function renderSortHeaders() {
+  document.querySelectorAll("th.sortable").forEach(header => {
+    const button = header.querySelector("[data-sort]");
+    const active = button.dataset.sort === state.sortKey;
+    const mark = button.querySelector(".sort-mark");
+    header.setAttribute("aria-sort", active ? (state.sortDirection === "asc" ? "ascending" : "descending") : "none");
+    mark.textContent = active ? (state.sortDirection === "asc" ? "↑" : "↓") : "";
+    button.title = active
+      ? `当前${state.sortDirection === "asc" ? "升序" : "降序"}，点击切换`
+      : `按${sortName[button.dataset.sort]}排序`;
   });
 }
 
 function renderTable() {
   const rows = filteredRows();
+  renderSortHeaders();
   $("#ranking-body").innerHTML = rows.map((row, index) => {
     const source = state.sourceAccuracy?.funds?.[row.code];
     const sourceDetail = source?.sources?.[source.best_source];
+    const purchase = purchaseStatus(row);
+    const marketRank = state.latest.rows.indexOf(row) + 1;
     return `
-    <tr data-code="${row.code}" class="${row.code === state.selectedCode ? "selected" : ""}">
-      <td class="rank">${index + 1}</td>
+    <tr data-code="${row.code}" class="${row.code === state.selectedCode ? "selected" : ""} purchase-${purchase.kind}">
+      <td class="rank">${marketRank}</td>
       <td class="fund-name"><strong>${escapeHtml(row.name)}</strong><small>${row.code} · ${categoryName[row.category] || "其他"}</small></td>
-      <td class="purchase">${escapeHtml(row.purchase_info || "开放申购")}</td>
+      <td class="purchase"><span class="purchase-badge ${purchase.kind}">${escapeHtml(purchase.label)}</span></td>
       <td class="num">${fmtNum(row.off_market_value)}<span class="change ${tone(row.off_market_change_pct)}">${fmtPct(row.off_market_change_pct)}</span></td>
       <td class="num">${fmtNum(row.on_market_price, 3)}<span class="change ${tone(row.on_market_change_pct)}">${fmtPct(row.on_market_change_pct)}</span></td>
       <td class="num source-cell">${source ? `数据源${source.best_source}<span class="change">昨偏差 ${fmtPct(sourceDetail?.yesterday_deviation_pct)}</span>` : "--"}</td>
       <td class="num"><span class="premium ${tone(row.premium_rate_pct)}">${fmtPct(row.premium_rate_pct)}</span></td>
     </tr>`;
   }).join("");
-  $("#result-count").textContent = `显示 ${rows.length} / ${state.latest.rows.length} 只基金`;
+  $("#result-count").textContent = `显示 ${rows.length} / ${state.latest.rows.length} 只基金 · ${sortName[state.sortKey]}${state.sortDirection === "asc" ? "升序" : "降序"}`;
 }
 
 function renderSourceAccuracy() {
@@ -233,6 +300,17 @@ function escapeHtml(value) {
 $("#search").addEventListener("input", renderTable);
 $("#category-filter").addEventListener("change", renderTable);
 $("#positive-only").addEventListener("change", renderTable);
+$("#purchasable-only").addEventListener("change", renderTable);
+document.querySelectorAll("[data-sort]").forEach(button => button.addEventListener("click", () => {
+  const key = button.dataset.sort;
+  if (state.sortKey === key) {
+    state.sortDirection = state.sortDirection === "asc" ? "desc" : "asc";
+  } else {
+    state.sortKey = key;
+    state.sortDirection = "asc";
+  }
+  renderTable();
+}));
 $("#fund-select").addEventListener("change", event => { state.selectedCode = event.target.value; renderTable(); renderChart(); renderSourceAccuracy(); });
 document.querySelectorAll("[data-range]").forEach(button => button.addEventListener("click", () => {
   state.selectedRange = button.dataset.range;

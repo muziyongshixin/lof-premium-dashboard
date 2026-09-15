@@ -154,6 +154,26 @@ input[type="search"]:focus, select:focus { border-color: #8795ad; box-shadow: 0 
 .table-scroll { overflow-x: auto; }
 table { width: 100%; border-collapse: collapse; font-size: 14px; }
 th { padding: 11px 12px; color: var(--muted); font-size: 12px; font-weight: 600; text-align: left; white-space: nowrap; border-bottom: 1px solid var(--line); }
+th.sortable { padding: 0; }
+th.sortable button {
+  display: flex;
+  width: 100%;
+  min-height: 42px;
+  align-items: center;
+  gap: 5px;
+  padding: 0 12px;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  white-space: nowrap;
+  cursor: pointer;
+}
+th.num.sortable button { justify-content: flex-end; }
+th.sortable button:hover, th.sortable button:focus-visible { color: var(--ink); background: #f7f9fc; outline: none; }
+th[aria-sort="ascending"] button, th[aria-sort="descending"] button { color: var(--ink); font-weight: 700; }
+.sort-mark { display: inline-block; min-width: 10px; color: var(--orange); font-size: 14px; }
 td { padding: 13px 12px; border-bottom: 1px solid var(--line); vertical-align: middle; }
 tbody tr { cursor: pointer; transition: background .15s ease; }
 tbody tr:hover, tbody tr.selected { background: #f7f9fc; }
@@ -162,6 +182,12 @@ tbody tr:hover, tbody tr.selected { background: #f7f9fc; }
 .fund-name strong { display: block; font-size: 14px; font-weight: 600; }
 .fund-name small { display: block; margin-top: 4px; color: var(--muted); font-variant-numeric: tabular-nums; }
 .purchase { color: var(--muted); white-space: nowrap; }
+.purchase-badge { display: inline-block; padding: 5px 8px; border-radius: 999px; font-size: 12px; font-weight: 650; }
+.purchase-badge.available { background: var(--green-soft); color: var(--green); }
+.purchase-badge.limited { background: #fff2d8; color: #b66a00; box-shadow: inset 0 0 0 1px rgba(255, 168, 0, .28); }
+.purchase-badge.paused { background: #f1f3f6; color: #7d8799; }
+.purchase-badge.other { background: #eef1f7; color: var(--navy); }
+tbody tr.purchase-limited td.purchase { background: linear-gradient(90deg, rgba(255,168,0,.11), transparent); }
 .source-cell { color: var(--ink); font-weight: 600; }
 .source-cell .change { color: var(--muted); font-weight: 400; }
 .num { text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums; }

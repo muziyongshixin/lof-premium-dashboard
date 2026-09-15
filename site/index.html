@@ -128,19 +128,23 @@
             <input id="positive-only" type="checkbox">
             <span>仅看正溢价</span>
           </label>
+          <label class="check-filter purchase-filter">
+            <input id="purchasable-only" type="checkbox">
+            <span>只看可购</span>
+          </label>
         </div>
       </div>
       <div class="table-scroll">
         <table>
           <thead>
             <tr>
-              <th>#</th>
-              <th>基金</th>
-              <th>申购</th>
-              <th class="num">场外估值</th>
-              <th class="num">场内价</th>
-              <th class="num">今日数据源</th>
-              <th class="num">实时溢价率</th>
+              <th class="sortable" aria-sort="none"><button type="button" data-sort="market_rank">#<span class="sort-mark" aria-hidden="true"></span></button></th>
+              <th class="sortable" aria-sort="none"><button type="button" data-sort="fund">基金<span class="sort-mark" aria-hidden="true"></span></button></th>
+              <th class="sortable" aria-sort="none"><button type="button" data-sort="purchase">申购<span class="sort-mark" aria-hidden="true"></span></button></th>
+              <th class="num sortable" aria-sort="none"><button type="button" data-sort="off_market_value">场外估值<span class="sort-mark" aria-hidden="true"></span></button></th>
+              <th class="num sortable" aria-sort="none"><button type="button" data-sort="on_market_price">场内价<span class="sort-mark" aria-hidden="true"></span></button></th>
+              <th class="num sortable" aria-sort="none"><button type="button" data-sort="source">今日数据源<span class="sort-mark" aria-hidden="true"></span></button></th>
+              <th class="num sortable" aria-sort="descending"><button type="button" data-sort="premium_rate_pct">实时溢价率<span class="sort-mark" aria-hidden="true">↓</span></button></th>
             </tr>
           </thead>
           <tbody id="ranking-body"></tbody>
