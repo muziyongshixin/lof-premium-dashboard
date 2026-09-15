@@ -59,7 +59,8 @@ def main() -> int:
             continue
         daily = json.loads(daily_path.read_text(encoding="utf-8"))
         for snapshot in daily.get("snapshots", []):
-            captured_at = snapshot.get("captured_at")
+            slot = snapshot.get("slot")
+            captured_at = f"{date}T{slot}:00+08:00" if slot else snapshot.get("captured_at")
             for row in snapshot.get("rows", []):
                 premium = row.get("premium_rate_pct")
                 if premium is None:
