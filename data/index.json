@@ -1,12 +1,14 @@
 {
-  "updated_at": "2026-09-15T17:05:21+08:00",
-  "latest_date": "2026-09-15",
-  "latest_slot": "15:00",
+  "updated_at": "2026-09-16T14:40:44+08:00",
+  "latest_date": "2026-09-16",
+  "latest_slot": "14:30",
   "dates": [
-    "2026-09-15"
+    "2026-09-15",
+    "2026-09-16"
   ],
   "intraday_dates": [
-    "2026-09-15"
+    "2026-09-15",
+    "2026-09-16"
   ],
   "intraday_retention_days": 60,
   "archive_granularity": "daily_close"
