@@ -3268,7 +3268,7 @@
     },
     {
       "slot": "15:00",
-      "captured_at": "2026-09-24T15:26:53+08:00",
+      "captured_at": "2026-09-24T15:47:10+08:00",
       "inside_date": "2026-09-24",
       "quote_date": "2026-09-24",
       "row_count": 296,
@@ -3604,17 +3604,6 @@
           "premium_rate_pct": 0.96275
         },
         {
-          "code": "501082",
-          "name": "博时科创主题混合(LOF)A",
-          "category": "stock",
-          "purchase_info": "",
-          "off_market_value": 3.8421,
-          "off_market_change_pct": -2.9,
-          "on_market_price": 3.879,
-          "on_market_change_pct": -1.096379,
-          "premium_rate_pct": 0.960412
-        },
-        {
           "code": "160106",
           "name": "南方高增长混合",
           "category": "stock",
@@ -3624,6 +3613,17 @@
           "on_market_price": 1.521,
           "on_market_change_pct": -1.425794,
           "premium_rate_pct": 0.949094
+        },
+        {
+          "code": "501082",
+          "name": "博时科创主题混合(LOF)A",
+          "category": "stock",
+          "purchase_info": "",
+          "off_market_value": 3.8433,
+          "off_market_change_pct": -2.87,
+          "on_market_price": 3.879,
+          "on_market_change_pct": -1.096379,
+          "premium_rate_pct": 0.928889
         },
         {
           "code": "161118",
@@ -3641,11 +3641,11 @@
           "name": "博时优势企业混合(LOF)A",
           "category": "stock",
           "purchase_info": "",
-          "off_market_value": 1.305,
+          "off_market_value": 1.3051,
           "off_market_change_pct": -0.74,
           "on_market_price": 1.317,
           "on_market_change_pct": 0.0,
-          "premium_rate_pct": 0.91954
+          "premium_rate_pct": 0.911808
         },
         {
           "code": "162216",
@@ -3945,17 +3945,6 @@
           "premium_rate_pct": 0.418657
         },
         {
-          "code": "160717",
-          "name": "嘉实恒生中国企业指数(QDII-LOF)",
-          "category": "apac",
-          "purchase_info": "",
-          "off_market_value": 0.7091,
-          "off_market_change_pct": -0.0634,
-          "on_market_price": 0.712,
-          "on_market_change_pct": 0.0,
-          "premium_rate_pct": 0.408969
-        },
-        {
           "code": "161219",
           "name": "国投瑞银新兴产业混合(LOF)A",
           "category": "stock",
@@ -4009,6 +3998,17 @@
           "on_market_price": 4.567,
           "on_market_change_pct": -2.435377,
           "premium_rate_pct": 0.386864
+        },
+        {
+          "code": "160717",
+          "name": "嘉实恒生中国企业指数(QDII-LOF)",
+          "category": "apac",
+          "purchase_info": "",
+          "off_market_value": 0.7093,
+          "off_market_change_pct": -0.0214,
+          "on_market_price": 0.712,
+          "on_market_change_pct": 0.0,
+          "premium_rate_pct": 0.380657
         },
         {
           "code": "167002",
@@ -4099,6 +4099,17 @@
           "premium_rate_pct": 0.31348
         },
         {
+          "code": "160527",
+          "name": "博时研究优选混合(LOF)A",
+          "category": "stock",
+          "purchase_info": "",
+          "off_market_value": 0.7736,
+          "off_market_change_pct": -2.0,
+          "on_market_price": 0.776,
+          "on_market_change_pct": -1.397713,
+          "premium_rate_pct": 0.310238
+        },
+        {
           "code": "161725",
           "name": "招商中证白酒指数A",
           "category": "index",
@@ -4130,17 +4141,6 @@
           "on_market_price": 1.421,
           "on_market_change_pct": 0.49505,
           "premium_rate_pct": 0.303522
-        },
-        {
-          "code": "160527",
-          "name": "博时研究优选混合(LOF)A",
-          "category": "stock",
-          "purchase_info": "",
-          "off_market_value": 0.7737,
-          "off_market_change_pct": -1.98,
-          "on_market_price": 0.776,
-          "on_market_change_pct": -1.397713,
-          "premium_rate_pct": 0.297273
         },
         {
           "code": "168301",
@@ -4187,6 +4187,17 @@
           "premium_rate_pct": 0.281834
         },
         {
+          "code": "501092",
+          "name": "交银施罗德瑞思混合(LOF)",
+          "category": "stock",
+          "purchase_info": "",
+          "off_market_value": 1.2725,
+          "off_market_change_pct": -1.31,
+          "on_market_price": 1.276,
+          "on_market_change_pct": -0.078309,
+          "premium_rate_pct": 0.275049
+        },
+        {
           "code": "501008",
           "name": "汇添富中证互联网医疗主题指数发起式(LOF)C",
           "category": "index",
@@ -4196,17 +4207,6 @@
           "on_market_price": 0.777,
           "on_market_change_pct": -0.766284,
           "premium_rate_pct": 0.271003
-        },
-        {
-          "code": "501092",
-          "name": "交银施罗德瑞思混合(LOF)",
-          "category": "stock",
-          "purchase_info": "",
-          "off_market_value": 1.2726,
-          "off_market_change_pct": -1.3,
-          "on_market_price": 1.276,
-          "on_market_change_pct": -0.078309,
-          "premium_rate_pct": 0.26717
         },
         {
           "code": "165520",
@@ -4297,15 +4297,15 @@
           "premium_rate_pct": 0.221819
         },
         {
-          "code": "501307",
-          "name": "银河中证沪港深高股息指数(LOF)A",
-          "category": "apac",
-          "purchase_info": "",
-          "off_market_value": 1.2383,
-          "off_market_change_pct": -0.0648,
-          "on_market_price": 1.241,
-          "on_market_change_pct": -0.080515,
-          "premium_rate_pct": 0.218041
+          "code": "501203",
+          "name": "易方达创新未来混合(LOF)",
+          "category": "stock",
+          "purchase_info": "限100万",
+          "off_market_value": 1.5477,
+          "off_market_change_pct": -2.12,
+          "on_market_price": 1.551,
+          "on_market_change_pct": -1.586294,
+          "premium_rate_pct": 0.21322
         },
         {
           "code": "501057",
@@ -4352,15 +4352,15 @@
           "premium_rate_pct": 0.203062
         },
         {
-          "code": "501203",
-          "name": "易方达创新未来混合(LOF)",
-          "category": "stock",
-          "purchase_info": "限100万",
-          "off_market_value": 1.5479,
-          "off_market_change_pct": -2.1,
-          "on_market_price": 1.551,
-          "on_market_change_pct": -1.586294,
-          "premium_rate_pct": 0.200271
+          "code": "501307",
+          "name": "银河中证沪港深高股息指数(LOF)A",
+          "category": "apac",
+          "purchase_info": "",
+          "off_market_value": 1.2385,
+          "off_market_change_pct": -0.0521,
+          "on_market_price": 1.241,
+          "on_market_change_pct": -0.080515,
+          "premium_rate_pct": 0.201857
         },
         {
           "code": "501089",
@@ -4405,17 +4405,6 @@
           "on_market_price": 1.229,
           "on_market_change_pct": -2.382844,
           "premium_rate_pct": 0.179328
-        },
-        {
-          "code": "164705",
-          "name": "汇添富恒生指数(QDII-LOF)A",
-          "category": "apac",
-          "purchase_info": "",
-          "off_market_value": 1.1071,
-          "off_market_change_pct": -0.2832,
-          "on_market_price": 1.109,
-          "on_market_change_pct": -0.716204,
-          "premium_rate_pct": 0.17162
         },
         {
           "code": "168104",
@@ -4473,17 +4462,6 @@
           "premium_rate_pct": 0.156495
         },
         {
-          "code": "501311",
-          "name": "嘉实恒生港股通新经济指数(LOF)A",
-          "category": "index",
-          "purchase_info": "",
-          "off_market_value": 0.9066,
-          "off_market_change_pct": -0.5287,
-          "on_market_price": 0.908,
-          "on_market_change_pct": -0.547645,
-          "premium_rate_pct": 0.154423
-        },
-        {
           "code": "502006",
           "name": "易方达中证国有企业改革指数(LOF)A",
           "category": "index",
@@ -4493,17 +4471,6 @@
           "on_market_price": 1.555,
           "on_market_change_pct": -1.332487,
           "premium_rate_pct": 0.14168
-        },
-        {
-          "code": "501205",
-          "name": "鹏华创新未来混合(LOF)C",
-          "category": "stock",
-          "purchase_info": "",
-          "off_market_value": 0.9946,
-          "off_market_change_pct": -3.47,
-          "on_market_price": 0.996,
-          "on_market_change_pct": -2.064897,
-          "premium_rate_pct": 0.14076
         },
         {
           "code": "501096",
@@ -4550,15 +4517,15 @@
           "premium_rate_pct": 0.122676
         },
         {
-          "code": "160924",
-          "name": "大成恒生指数(QDII-LOF)A",
-          "category": "apac",
+          "code": "501311",
+          "name": "嘉实恒生港股通新经济指数(LOF)A",
+          "category": "index",
           "purchase_info": "",
-          "off_market_value": 0.9789,
-          "off_market_change_pct": -0.2832,
-          "on_market_price": 0.98,
-          "on_market_change_pct": -0.406504,
-          "premium_rate_pct": 0.112371
+          "off_market_value": 0.9069,
+          "off_market_change_pct": -0.4966,
+          "on_market_price": 0.908,
+          "on_market_change_pct": -0.547645,
+          "premium_rate_pct": 0.121292
         },
         {
           "code": "161035",
@@ -4583,15 +4550,26 @@
           "premium_rate_pct": 0.106345
         },
         {
-          "code": "163418",
-          "name": "兴全合兴混合(LOF)A",
+          "code": "501205",
+          "name": "鹏华创新未来混合(LOF)C",
           "category": "stock",
           "purchase_info": "",
-          "off_market_value": 0.8202,
-          "off_market_change_pct": -1.62,
-          "on_market_price": 0.821,
-          "on_market_change_pct": -1.676647,
-          "premium_rate_pct": 0.097537
+          "off_market_value": 0.995,
+          "off_market_change_pct": -3.44,
+          "on_market_price": 0.996,
+          "on_market_change_pct": -2.064897,
+          "premium_rate_pct": 0.100503
+        },
+        {
+          "code": "164705",
+          "name": "汇添富恒生指数(QDII-LOF)A",
+          "category": "apac",
+          "purchase_info": "",
+          "off_market_value": 1.1079,
+          "off_market_change_pct": -0.2104,
+          "on_market_price": 1.109,
+          "on_market_change_pct": -0.716204,
+          "premium_rate_pct": 0.099287
         },
         {
           "code": "163412",
@@ -4649,6 +4627,17 @@
           "premium_rate_pct": 0.076104
         },
         {
+          "code": "163418",
+          "name": "兴全合兴混合(LOF)A",
+          "category": "stock",
+          "purchase_info": "",
+          "off_market_value": 0.8204,
+          "off_market_change_pct": -1.6,
+          "on_market_price": 0.821,
+          "on_market_change_pct": -1.676647,
+          "premium_rate_pct": 0.073135
+        },
+        {
           "code": "161227",
           "name": "国投瑞银瑞福深证100指数(LOF)",
           "category": "index",
@@ -4693,15 +4682,26 @@
           "premium_rate_pct": 0.046175
         },
         {
+          "code": "160924",
+          "name": "大成恒生指数(QDII-LOF)A",
+          "category": "apac",
+          "purchase_info": "",
+          "off_market_value": 0.9796,
+          "off_market_change_pct": -0.2104,
+          "on_market_price": 0.98,
+          "on_market_change_pct": -0.406504,
+          "premium_rate_pct": 0.040833
+        },
+        {
           "code": "501077",
           "name": "富国创新企业混合(LOF)A",
           "category": "stock",
           "purchase_info": "限500万",
-          "off_market_value": 3.2528,
+          "off_market_value": 3.2529,
           "off_market_change_pct": -1.29,
           "on_market_price": 3.254,
           "on_market_change_pct": -0.732154,
-          "premium_rate_pct": 0.036891
+          "premium_rate_pct": 0.033816
         },
         {
           "code": "162412",
@@ -4715,17 +4715,6 @@
           "premium_rate_pct": 0.033681
         },
         {
-          "code": "501091",
-          "name": "嘉实欣荣混合(LOF)A",
-          "category": "stock",
-          "purchase_info": "",
-          "off_market_value": 0.9987,
-          "off_market_change_pct": -2.08,
-          "on_market_price": 0.999,
-          "on_market_change_pct": -1.769912,
-          "premium_rate_pct": 0.030039
-        },
-        {
           "code": "160633",
           "name": "鹏华中证全指证券公司指数(LOF)A",
           "category": "index",
@@ -4735,6 +4724,17 @@
           "on_market_price": 1.032,
           "on_market_change_pct": -1.338432,
           "premium_rate_pct": 0.029078
+        },
+        {
+          "code": "501091",
+          "name": "嘉实欣荣混合(LOF)A",
+          "category": "stock",
+          "purchase_info": "",
+          "off_market_value": 0.9988,
+          "off_market_change_pct": -2.07,
+          "on_market_price": 0.999,
+          "on_market_change_pct": -1.769912,
+          "premium_rate_pct": 0.020024
         },
         {
           "code": "161812",
@@ -4814,17 +4814,6 @@
           "premium_rate_pct": -0.017806
         },
         {
-          "code": "161728",
-          "name": "招商瑞智优选混合(LOF)",
-          "category": "stock",
-          "purchase_info": "",
-          "off_market_value": 1.4783,
-          "off_market_change_pct": -1.67,
-          "on_market_price": 1.478,
-          "on_market_change_pct": -1.532312,
-          "premium_rate_pct": -0.020294
-        },
-        {
           "code": "161028",
           "name": "富国中证新能源汽车指数A",
           "category": "index",
@@ -4834,6 +4823,17 @@
           "on_market_price": 0.931,
           "on_market_change_pct": -1.689546,
           "premium_rate_pct": -0.021478
+        },
+        {
+          "code": "161728",
+          "name": "招商瑞智优选混合(LOF)",
+          "category": "stock",
+          "purchase_info": "",
+          "off_market_value": 1.4785,
+          "off_market_change_pct": -1.66,
+          "on_market_price": 1.478,
+          "on_market_change_pct": -1.532312,
+          "premium_rate_pct": -0.033818
         },
         {
           "code": "160218",
@@ -5056,17 +5056,6 @@
           "premium_rate_pct": -0.123609
         },
         {
-          "code": "501305",
-          "name": "汇添富中证港股通高股息投资ETF联接(LOF)A",
-          "category": "apac",
-          "purchase_info": "",
-          "off_market_value": 1.2756,
-          "off_market_change_pct": 0.4652,
-          "on_market_price": 1.274,
-          "on_market_change_pct": 0.0,
-          "premium_rate_pct": -0.125431
-        },
-        {
           "code": "502003",
           "name": "易方达中证军工指数(LOF)A",
           "category": "index",
@@ -5098,6 +5087,17 @@
           "on_market_price": 1.997,
           "on_market_change_pct": -1.333992,
           "premium_rate_pct": -0.154992
+        },
+        {
+          "code": "501305",
+          "name": "汇添富中证港股通高股息投资ETF联接(LOF)A",
+          "category": "apac",
+          "purchase_info": "",
+          "off_market_value": 1.2762,
+          "off_market_change_pct": 0.5131,
+          "on_market_price": 1.274,
+          "on_market_change_pct": 0.0,
+          "premium_rate_pct": -0.172387
         },
         {
           "code": "501016",
@@ -5232,17 +5232,6 @@
           "premium_rate_pct": -0.225438
         },
         {
-          "code": "161831",
-          "name": "银华恒生中国企业指数(QDII-LOF)A",
-          "category": "apac",
-          "purchase_info": "",
-          "off_market_value": 0.7086,
-          "off_market_change_pct": -0.0634,
-          "on_market_price": 0.707,
-          "on_market_change_pct": -0.422535,
-          "premium_rate_pct": -0.225797
-        },
-        {
           "code": "163109",
           "name": "申万菱信深证成份指数A",
           "category": "index",
@@ -5252,17 +5241,6 @@
           "on_market_price": 0.742,
           "on_market_change_pct": -2.368421,
           "premium_rate_pct": -0.228587
-        },
-        {
-          "code": "501303",
-          "name": "广发港股通恒生综合中型股指数(LOF)A",
-          "category": "apac",
-          "purchase_info": "",
-          "off_market_value": 0.9403,
-          "off_market_change_pct": -1.3843,
-          "on_market_price": 0.938,
-          "on_market_change_pct": -0.845666,
-          "premium_rate_pct": -0.244603
         },
         {
           "code": "160643",
@@ -5276,26 +5254,15 @@
           "premium_rate_pct": -0.249591
         },
         {
-          "code": "501302",
-          "name": "南方恒生ETF联接A",
+          "code": "161831",
+          "name": "银华恒生中国企业指数(QDII-LOF)A",
           "category": "apac",
           "purchase_info": "",
-          "off_market_value": 1.1198,
-          "off_market_change_pct": -0.2832,
-          "on_market_price": 1.117,
-          "on_market_change_pct": -0.622776,
-          "premium_rate_pct": -0.250045
-        },
-        {
-          "code": "501189",
-          "name": "嘉实产业优选混合(LOF)A",
-          "category": "stock",
-          "purchase_info": "",
-          "off_market_value": 0.9836,
-          "off_market_change_pct": -1.91,
-          "on_market_price": 0.981,
-          "on_market_change_pct": -1.009082,
-          "premium_rate_pct": -0.264335
+          "off_market_value": 0.7088,
+          "off_market_change_pct": -0.0214,
+          "on_market_price": 0.707,
+          "on_market_change_pct": -0.422535,
+          "premium_rate_pct": -0.25395
         },
         {
           "code": "162207",
@@ -5309,15 +5276,15 @@
           "premium_rate_pct": -0.275602
         },
         {
-          "code": "501306",
-          "name": "汇添富中证港股通高股息投资ETF联接(LOF)C",
-          "category": "apac",
+          "code": "501189",
+          "name": "嘉实产业优选混合(LOF)A",
+          "category": "stock",
           "purchase_info": "",
-          "off_market_value": 1.2304,
-          "off_market_change_pct": 0.4652,
-          "on_market_price": 1.227,
-          "on_market_change_pct": 0.163265,
-          "premium_rate_pct": -0.276333
+          "off_market_value": 0.9838,
+          "off_market_change_pct": -1.88,
+          "on_market_price": 0.981,
+          "on_market_change_pct": -1.009082,
+          "premium_rate_pct": -0.284611
         },
         {
           "code": "161631",
@@ -5342,17 +5309,6 @@
           "premium_rate_pct": -0.2997
         },
         {
-          "code": "501098",
-          "name": "建信优享科技创新混合(LOF)",
-          "category": "stock",
-          "purchase_info": "",
-          "off_market_value": 1.6631,
-          "off_market_change_pct": -2.64,
-          "on_market_price": 1.658,
-          "on_market_change_pct": -2.009456,
-          "premium_rate_pct": -0.306656
-        },
-        {
           "code": "501026",
           "name": "财通多策略福享混合(LOF)A",
           "category": "stock",
@@ -5362,6 +5318,17 @@
           "on_market_price": 2.575,
           "on_market_change_pct": -3.810235,
           "premium_rate_pct": -0.309717
+        },
+        {
+          "code": "501098",
+          "name": "建信优享科技创新混合(LOF)",
+          "category": "stock",
+          "purchase_info": "",
+          "off_market_value": 1.6633,
+          "off_market_change_pct": -2.63,
+          "on_market_price": 1.658,
+          "on_market_change_pct": -2.009456,
+          "premium_rate_pct": -0.318644
         },
         {
           "code": "163821",
@@ -5386,15 +5353,26 @@
           "premium_rate_pct": -0.321027
         },
         {
-          "code": "160322",
-          "name": "华夏港股通精选股票发起式(LOF)A",
+          "code": "501302",
+          "name": "南方恒生ETF联接A",
           "category": "apac",
           "purchase_info": "",
-          "off_market_value": 0.9862,
-          "off_market_change_pct": -0.53,
-          "on_market_price": 0.983,
-          "on_market_change_pct": -0.506073,
-          "premium_rate_pct": -0.324478
+          "off_market_value": 1.1206,
+          "off_market_change_pct": -0.2104,
+          "on_market_price": 1.117,
+          "on_market_change_pct": -0.622776,
+          "premium_rate_pct": -0.321256
+        },
+        {
+          "code": "501306",
+          "name": "汇添富中证港股通高股息投资ETF联接(LOF)C",
+          "category": "apac",
+          "purchase_info": "",
+          "off_market_value": 1.231,
+          "off_market_change_pct": 0.5131,
+          "on_market_price": 1.227,
+          "on_market_change_pct": 0.163265,
+          "premium_rate_pct": -0.324939
         },
         {
           "code": "164701",
@@ -5408,15 +5386,15 @@
           "premium_rate_pct": -0.325615
         },
         {
-          "code": "501021",
-          "name": "华宝港股通标普香港上市中国中小盘指数(LOF)A",
+          "code": "501303",
+          "name": "广发港股通恒生综合中型股指数(LOF)A",
           "category": "apac",
           "purchase_info": "",
-          "off_market_value": 1.2985,
-          "off_market_change_pct": -0.97,
-          "on_market_price": 1.294,
-          "on_market_change_pct": -0.994644,
-          "premium_rate_pct": -0.346554
+          "off_market_value": 0.9412,
+          "off_market_change_pct": -1.2936,
+          "on_market_price": 0.938,
+          "on_market_change_pct": -0.845666,
+          "premium_rate_pct": -0.339992
         },
         {
           "code": "501097",
@@ -5485,6 +5463,17 @@
           "premium_rate_pct": -0.372118
         },
         {
+          "code": "501021",
+          "name": "华宝港股通标普香港上市中国中小盘指数(LOF)A",
+          "category": "apac",
+          "purchase_info": "",
+          "off_market_value": 1.299,
+          "off_market_change_pct": -0.94,
+          "on_market_price": 1.294,
+          "on_market_change_pct": -0.994644,
+          "premium_rate_pct": -0.384911
+        },
+        {
           "code": "160135",
           "name": "南方中证高铁产业指数(LOF)",
           "category": "index",
@@ -5496,15 +5485,15 @@
           "premium_rate_pct": -0.389025
         },
         {
-          "code": "501310",
-          "name": "华宝标普沪港深中国增强价值指数(LOF)A",
+          "code": "160322",
+          "name": "华夏港股通精选股票发起式(LOF)A",
           "category": "apac",
           "purchase_info": "",
-          "off_market_value": 1.3283,
-          "off_market_change_pct": 0.49,
-          "on_market_price": 1.323,
-          "on_market_change_pct": 0.075643,
-          "premium_rate_pct": -0.399006
+          "off_market_value": 0.9869,
+          "off_market_change_pct": -0.45,
+          "on_market_price": 0.983,
+          "on_market_change_pct": -0.506073,
+          "premium_rate_pct": -0.395177
         },
         {
           "code": "501073",
@@ -5527,6 +5516,17 @@
           "on_market_price": 2.168,
           "on_market_change_pct": 1.213819,
           "premium_rate_pct": -0.413413
+        },
+        {
+          "code": "160918",
+          "name": "大成中小盘混合(LOF)A",
+          "category": "stock",
+          "purchase_info": "",
+          "off_market_value": 2.5375,
+          "off_market_change_pct": -0.61,
+          "on_market_price": 2.527,
+          "on_market_change_pct": -0.118577,
+          "premium_rate_pct": -0.413793
         },
         {
           "code": "163415",
@@ -5573,17 +5573,6 @@
           "premium_rate_pct": -0.425532
         },
         {
-          "code": "160918",
-          "name": "大成中小盘混合(LOF)A",
-          "category": "stock",
-          "purchase_info": "",
-          "off_market_value": 2.5378,
-          "off_market_change_pct": -0.6,
-          "on_market_price": 2.527,
-          "on_market_change_pct": -0.118577,
-          "premium_rate_pct": -0.425565
-        },
-        {
           "code": "501059",
           "name": "西部利得中证国有企业红利指数增强(LOF)A",
           "category": "index",
@@ -5595,26 +5584,37 @@
           "premium_rate_pct": -0.42643
         },
         {
-          "code": "501050",
-          "name": "华夏沪港通上证50AH优选指数(LOF)A",
-          "category": "index",
+          "code": "501310",
+          "name": "华宝标普沪港深中国增强价值指数(LOF)A",
+          "category": "apac",
           "purchase_info": "",
-          "off_market_value": 1.7034,
-          "off_market_change_pct": -1.2498,
-          "on_market_price": 1.696,
-          "on_market_change_pct": -0.934579,
-          "premium_rate_pct": -0.434425
+          "off_market_value": 1.3287,
+          "off_market_change_pct": 0.52,
+          "on_market_price": 1.323,
+          "on_market_change_pct": 0.075643,
+          "premium_rate_pct": -0.428991
         },
         {
           "code": "161729",
           "name": "招商瑞利混合(LOF)A",
           "category": "stock",
           "purchase_info": "限100万",
-          "off_market_value": 1.8924,
+          "off_market_value": 1.8923,
           "off_market_change_pct": -1.17,
           "on_market_price": 1.884,
           "on_market_change_pct": -1.977107,
-          "premium_rate_pct": -0.443881
+          "premium_rate_pct": -0.43862
+        },
+        {
+          "code": "161124",
+          "name": "易方达香港恒生综合小型股指数(QDII-LOF)A",
+          "category": "apac",
+          "purchase_info": "限3000元",
+          "off_market_value": 0.8769,
+          "off_market_change_pct": -0.9005,
+          "on_market_price": 0.873,
+          "on_market_change_pct": -0.682594,
+          "premium_rate_pct": -0.444749
         },
         {
           "code": "161126",
@@ -5648,17 +5648,6 @@
           "on_market_price": 1.27,
           "on_market_change_pct": -1.778809,
           "premium_rate_pct": -0.446814
-        },
-        {
-          "code": "161124",
-          "name": "易方达香港恒生综合小型股指数(QDII-LOF)A",
-          "category": "apac",
-          "purchase_info": "限3000元",
-          "off_market_value": 0.877,
-          "off_market_change_pct": -0.8951,
-          "on_market_price": 0.873,
-          "on_market_change_pct": -0.682594,
-          "premium_rate_pct": -0.4561
         },
         {
           "code": "161720",
@@ -5727,17 +5716,6 @@
           "premium_rate_pct": -0.489494
         },
         {
-          "code": "169104",
-          "name": "东方红睿满沪港深混合(LOF)A",
-          "category": "stock",
-          "purchase_info": "",
-          "off_market_value": 2.8591,
-          "off_market_change_pct": -1.82,
-          "on_market_price": 2.845,
-          "on_market_change_pct": -1.76105,
-          "premium_rate_pct": -0.493162
-        },
-        {
           "code": "160133",
           "name": "南方天元新产业股票(LOF)",
           "category": "stock",
@@ -5760,6 +5738,17 @@
           "premium_rate_pct": -0.498299
         },
         {
+          "code": "501050",
+          "name": "华夏沪港通上证50AH优选指数(LOF)A",
+          "category": "index",
+          "purchase_info": "",
+          "off_market_value": 1.7045,
+          "off_market_change_pct": -1.1884,
+          "on_market_price": 1.696,
+          "on_market_change_pct": -0.934579,
+          "premium_rate_pct": -0.49868
+        },
+        {
           "code": "160212",
           "name": "国泰估值优势混合(LOF)A",
           "category": "stock",
@@ -5769,6 +5758,17 @@
           "on_market_price": 3.56,
           "on_market_change_pct": -1.684618,
           "premium_rate_pct": -0.500293
+        },
+        {
+          "code": "169104",
+          "name": "东方红睿满沪港深混合(LOF)A",
+          "category": "stock",
+          "purchase_info": "",
+          "off_market_value": 2.8595,
+          "off_market_change_pct": -1.8,
+          "on_market_price": 2.845,
+          "on_market_change_pct": -1.76105,
+          "premium_rate_pct": -0.507082
         },
         {
           "code": "162415",
@@ -5835,17 +5835,6 @@
           "on_market_price": 1.428,
           "on_market_change_pct": -1.85567,
           "premium_rate_pct": -0.550178
-        },
-        {
-          "code": "501301",
-          "name": "华宝港股通恒生中国(香港上市)30ETF联接(LOF)A",
-          "category": "apac",
-          "purchase_info": "",
-          "off_market_value": 1.1906,
-          "off_market_change_pct": 0.1466,
-          "on_market_price": 1.184,
-          "on_market_change_pct": -0.920502,
-          "premium_rate_pct": -0.554342
         },
         {
           "code": "161131",
@@ -5969,6 +5958,17 @@
           "premium_rate_pct": -0.60947
         },
         {
+          "code": "501301",
+          "name": "华宝港股通恒生中国(香港上市)30ETF联接(LOF)A",
+          "category": "apac",
+          "purchase_info": "",
+          "off_market_value": 1.1913,
+          "off_market_change_pct": 0.1996,
+          "on_market_price": 1.184,
+          "on_market_change_pct": -0.920502,
+          "premium_rate_pct": -0.612776
+        },
+        {
           "code": "161229",
           "name": "国投瑞银中国价值发现股票(QDII-LOF)",
           "category": "apac",
@@ -6002,17 +6002,6 @@
           "premium_rate_pct": -0.647037
         },
         {
-          "code": "163417",
-          "name": "兴全合宜混合(LOF)A",
-          "category": "stock",
-          "purchase_info": "",
-          "off_market_value": 2.0428,
-          "off_market_change_pct": -2.59,
-          "on_market_price": 2.029,
-          "on_market_change_pct": -2.028006,
-          "premium_rate_pct": -0.675543
-        },
-        {
           "code": "169101",
           "name": "东方红睿丰混合(LOF)",
           "category": "stock",
@@ -6035,6 +6024,17 @@
           "premium_rate_pct": -0.678393
         },
         {
+          "code": "163417",
+          "name": "兴全合宜混合(LOF)A",
+          "category": "stock",
+          "purchase_info": "",
+          "off_market_value": 2.0431,
+          "off_market_change_pct": -2.57,
+          "on_market_price": 2.029,
+          "on_market_change_pct": -2.028006,
+          "premium_rate_pct": -0.690128
+        },
+        {
           "code": "166107",
           "name": "信澳量化多因子混合(LOF)A",
           "category": "stock",
@@ -6044,17 +6044,6 @@
           "on_market_price": 1.427,
           "on_market_change_pct": -0.833912,
           "premium_rate_pct": -0.695894
-        },
-        {
-          "code": "501025",
-          "name": "鹏华港股通中证香港银行投资指数(LOF)A",
-          "category": "apac",
-          "purchase_info": "",
-          "off_market_value": 1.9194,
-          "off_market_change_pct": 0.0893,
-          "on_market_price": 1.906,
-          "on_market_change_pct": 0.315789,
-          "premium_rate_pct": -0.698135
         },
         {
           "code": "165508",
@@ -6101,17 +6090,6 @@
           "premium_rate_pct": -0.747052
         },
         {
-          "code": "501208",
-          "name": "中欧创新未来混合(LOF)",
-          "category": "stock",
-          "purchase_info": "",
-          "off_market_value": 1.2847,
-          "off_market_change_pct": -2.23,
-          "on_market_price": 1.275,
-          "on_market_change_pct": -2.522936,
-          "premium_rate_pct": -0.75504
-        },
-        {
           "code": "501018",
           "name": "南方原油(QDII-LOF-FOF)A",
           "category": "commodity",
@@ -6127,11 +6105,11 @@
           "name": "东方红睿华沪港深混合(LOF)A",
           "category": "stock",
           "purchase_info": "",
-          "off_market_value": 2.0719,
-          "off_market_change_pct": -1.13,
+          "off_market_value": 2.072,
+          "off_market_change_pct": -1.12,
           "on_market_price": 2.056,
           "on_market_change_pct": -1.438159,
-          "premium_rate_pct": -0.767412
+          "premium_rate_pct": -0.772201
         },
         {
           "code": "160910",
@@ -6145,15 +6123,26 @@
           "premium_rate_pct": -0.77821
         },
         {
-          "code": "501188",
-          "name": "汇添富核心精选混合(LOF)",
+          "code": "501208",
+          "name": "中欧创新未来混合(LOF)",
           "category": "stock",
           "purchase_info": "",
-          "off_market_value": 1.0393,
-          "off_market_change_pct": -2.55,
-          "on_market_price": 1.031,
-          "on_market_change_pct": -2.367424,
-          "premium_rate_pct": -0.798614
+          "off_market_value": 1.2851,
+          "off_market_change_pct": -2.19,
+          "on_market_price": 1.275,
+          "on_market_change_pct": -2.522936,
+          "premium_rate_pct": -0.785931
+        },
+        {
+          "code": "501025",
+          "name": "鹏华港股通中证香港银行投资指数(LOF)A",
+          "category": "apac",
+          "purchase_info": "",
+          "off_market_value": 1.9215,
+          "off_market_change_pct": 0.1968,
+          "on_market_price": 1.906,
+          "on_market_change_pct": 0.315789,
+          "premium_rate_pct": -0.806661
         },
         {
           "code": "160323",
@@ -6167,15 +6156,15 @@
           "premium_rate_pct": -0.837673
         },
         {
-          "code": "501081",
-          "name": "中欧科创主题混合(LOF)A",
+          "code": "501188",
+          "name": "汇添富核心精选混合(LOF)",
           "category": "stock",
           "purchase_info": "",
-          "off_market_value": 2.9199,
-          "off_market_change_pct": -2.17,
-          "on_market_price": 2.895,
-          "on_market_change_pct": -3.467823,
-          "premium_rate_pct": -0.852769
+          "off_market_value": 1.0398,
+          "off_market_change_pct": -2.5,
+          "on_market_price": 1.031,
+          "on_market_change_pct": -2.367424,
+          "premium_rate_pct": -0.846317
         },
         {
           "code": "160421",
@@ -6187,6 +6176,17 @@
           "on_market_price": 1.86,
           "on_market_change_pct": -2.310924,
           "premium_rate_pct": -0.863447
+        },
+        {
+          "code": "501081",
+          "name": "中欧科创主题混合(LOF)A",
+          "category": "stock",
+          "purchase_info": "",
+          "off_market_value": 2.9205,
+          "off_market_change_pct": -2.14,
+          "on_market_price": 2.895,
+          "on_market_change_pct": -3.467823,
+          "premium_rate_pct": -0.873138
         },
         {
           "code": "160142",
@@ -6211,17 +6211,6 @@
           "premium_rate_pct": -0.921161
         },
         {
-          "code": "501071",
-          "name": "泓德丰泽混合(LOF)A",
-          "category": "stock",
-          "purchase_info": "",
-          "off_market_value": 0.9215,
-          "off_market_change_pct": -0.74,
-          "on_market_price": 0.913,
-          "on_market_change_pct": -1.510248,
-          "premium_rate_pct": -0.922409
-        },
-        {
           "code": "501209",
           "name": "银华富久食品饮料精选混合(LOF)A",
           "category": "stock",
@@ -6233,15 +6222,26 @@
           "premium_rate_pct": -0.927487
         },
         {
+          "code": "501071",
+          "name": "泓德丰泽混合(LOF)A",
+          "category": "stock",
+          "purchase_info": "",
+          "off_market_value": 0.9216,
+          "off_market_change_pct": -0.74,
+          "on_market_price": 0.913,
+          "on_market_change_pct": -1.510248,
+          "premium_rate_pct": -0.93316
+        },
+        {
           "code": "164403",
           "name": "前海开源沪港深农业主题精选混合(LOF)A",
           "category": "stock",
           "purchase_info": "",
-          "off_market_value": 0.941,
-          "off_market_change_pct": -1.13,
+          "off_market_value": 0.9408,
+          "off_market_change_pct": -1.14,
           "on_market_price": 0.932,
           "on_market_change_pct": -1.16649,
-          "premium_rate_pct": -0.956429
+          "premium_rate_pct": -0.935374
         },
         {
           "code": "501095",
@@ -6376,17 +6376,6 @@
           "premium_rate_pct": -1.312531
         },
         {
-          "code": "501206",
-          "name": "汇添富创新未来混合(LOF)",
-          "category": "stock",
-          "purchase_info": "",
-          "off_market_value": 0.8918,
-          "off_market_change_pct": -1.8,
-          "on_market_price": 0.88,
-          "on_market_change_pct": -2.330744,
-          "premium_rate_pct": -1.323167
-        },
-        {
           "code": "501076",
           "name": "鹏华创新动力混合(LOF)",
           "category": "stock",
@@ -6398,6 +6387,28 @@
           "premium_rate_pct": -1.3312
         },
         {
+          "code": "501206",
+          "name": "汇添富创新未来混合(LOF)",
+          "category": "stock",
+          "purchase_info": "",
+          "off_market_value": 0.892,
+          "off_market_change_pct": -1.79,
+          "on_market_price": 0.88,
+          "on_market_change_pct": -2.330744,
+          "premium_rate_pct": -1.345291
+        },
+        {
+          "code": "501087",
+          "name": "交银施罗德瑞丰混合(LOF)",
+          "category": "stock",
+          "purchase_info": "",
+          "off_market_value": 1.3297,
+          "off_market_change_pct": 0.18,
+          "on_market_price": 1.311,
+          "on_market_change_pct": -1.131222,
+          "premium_rate_pct": -1.406332
+        },
+        {
           "code": "162605",
           "name": "景顺长城鼎益混合(LOF)A",
           "category": "stock",
@@ -6407,17 +6418,6 @@
           "on_market_price": 1.568,
           "on_market_change_pct": -2.183406,
           "premium_rate_pct": -1.420847
-        },
-        {
-          "code": "501087",
-          "name": "交银施罗德瑞丰混合(LOF)",
-          "category": "stock",
-          "purchase_info": "",
-          "off_market_value": 1.3301,
-          "off_market_change_pct": 0.2,
-          "on_market_price": 1.311,
-          "on_market_change_pct": -1.131222,
-          "premium_rate_pct": -1.435982
         },
         {
           "code": "160512",
