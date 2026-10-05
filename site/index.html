@@ -62,15 +62,20 @@
       <div class="range-controls" role="group" aria-label="历史走势时间范围">
         <button type="button" data-range="1">当日</button>
         <button type="button" data-range="5">最近 5 个交易日</button>
+        <button type="button" data-range="7" class="active" aria-pressed="true">最近 7 个交易日</button>
         <button type="button" data-range="20">最近 20 个交易日</button>
-        <button type="button" data-range="60" class="active" aria-pressed="true">最近 60 个交易日</button>
+        <button type="button" data-range="60">最近 60 个交易日</button>
         <button type="button" data-range="all">全部历史</button>
       </div>
+      <div class="chart-legend"><span class="legend-premium">溢价率（%）</span><span class="legend-volume">日成交量（万份）</span><span>上下图按交易日对齐</span></div>
       <div id="chart-wrap" class="chart-wrap">
         <svg id="trend-chart" role="img" aria-labelledby="chart-title chart-desc"></svg>
-        <p id="chart-desc" class="sr-only">基金溢价率历史折线图</p>
+        <p id="chart-desc" class="sr-only">上图为基金溢价率折线，下图为日成交量柱状图，使用独立纵轴、共享交易日横轴。选择柱子可查看成交量和成交额。</p>
         <div id="chart-empty" class="empty" hidden>需要至少两个快照才能形成走势线。</div>
       </div>
+      <p id="volume-detail" class="volume-detail" aria-live="polite">日成交量加载中…</p>
+      <p id="volume-note" class="history-note"></p>
+      <details class="volume-table-wrap"><summary>查看逐日成交量和成交额</summary><div class="table-scroll"><table class="source-table"><thead><tr><th>交易日</th><th class="num">成交量（万份）</th><th class="num">成交额（万元）</th></tr></thead><tbody id="volume-body"></tbody></table></div></details>
       <div class="chart-meta">
         <span id="chart-range">--</span>
         <span id="chart-latest">--</span>

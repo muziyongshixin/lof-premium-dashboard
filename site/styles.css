@@ -124,8 +124,21 @@ input[type="search"]:focus, select:focus { border-color: #8795ad; box-shadow: 0 
 .range-controls button:hover { border-color: #aeb8c8; color: var(--ink); }
 .range-controls button.active { border-color: var(--navy); background: var(--navy); color: white; }
 
-.chart-wrap { position: relative; min-height: 270px; }
-#trend-chart { display: block; width: 100%; height: 270px; overflow: visible; }
+.chart-wrap { position: relative; min-height: 400px; overflow-x: auto; }
+#trend-chart { display: block; width: 100%; min-width: 560px; height: 400px; }
+.chart-legend { display: flex; flex-wrap: wrap; gap: 16px; margin: 16px 0 2px; color: var(--muted); font-size: 12px; }
+.legend-premium::before, .legend-volume::before { content: ""; display: inline-block; width: 16px; height: 4px; margin-right: 6px; vertical-align: middle; background: var(--orange); }
+.legend-volume::before { height: 10px; background: #6696bd; border-radius: 2px; }
+.volume-bar { fill: #6696bd; }
+.volume-hit { fill: transparent; cursor: crosshair; }
+.volume-day:hover .volume-bar, .volume-day:focus .volume-bar { fill: #285f8b; }
+.volume-day:focus { outline: none; }
+.volume-day:focus .volume-hit { stroke: #285f8b; stroke-width: 1; }
+.volume-missing { stroke: #9ba6b7; stroke-dasharray: 3 3; }
+.volume-detail { margin: 12px 0 5px; padding: 12px 14px; background: #f2f7fb; border-radius: 10px; color: #285f8b; font-size: 13px; font-variant-numeric: tabular-nums; }
+.volume-table-wrap { margin: 12px 0; color: var(--muted); font-size: 12px; }
+.volume-table-wrap summary { cursor: pointer; }
+.volume-table-wrap .table-scroll { max-height: 260px; margin-top: 8px; }
 .chart-grid { stroke: var(--line); stroke-width: 1; }
 .chart-zero { stroke: #aeb7c7; stroke-dasharray: 5 5; }
 .chart-line { fill: none; stroke: var(--orange); stroke-width: 3; stroke-linejoin: round; stroke-linecap: round; }

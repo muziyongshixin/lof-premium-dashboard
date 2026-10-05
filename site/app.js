@@ -3,7 +3,7 @@ const state = {
   index: null,
   sourceAccuracy: null,
   selectedCode: null,
-  selectedRange: "60",
+  selectedRange: "7",
   sortKey: "premium_rate_pct",
   sortDirection: "desc",
   trendCache: new Map(),
@@ -68,7 +68,7 @@ function renderSummary() {
 
 function renderFundOptions() {
   const select = $("#fund-select");
-  const rows = state.latest.rows.filter(row => row.premium_rate_pct != null);
+  const rows = state.latest.rows;
   select.innerHTML = rows.map(row => `<option value="${row.code}">${row.code} ${escapeHtml(row.name)}</option>`).join("");
   select.value = state.selectedCode;
 }
@@ -202,6 +202,9 @@ function renderChart() {
   svg.innerHTML = "";
   empty.hidden = false;
   empty.textContent = "正在加载历史走势…";
+  $("#volume-detail").textContent = "日成交量加载中…";
+  $("#volume-note").textContent = "";
+  $("#volume-body").innerHTML = "";
   if (!code) return;
 
   loadTrend(code).then(fund => {
@@ -210,10 +213,11 @@ function renderChart() {
       .filter(point => point[1] != null)
       .map(point => ({ date: new Date(point[0]), value: point[1], tradingDate: shanghaiDate(point[0]) }))
       .filter(point => !Number.isNaN(point.date.getTime()));
-    drawChart(filterPointsByRange(allPoints), current, fund);
+    drawChart(allPoints, current, fund);
   }).catch(error => {
     if (request !== state.chartRequest) return;
     $("#chart-range").textContent = "历史数据加载失败";
+    $("#volume-detail").textContent = "日成交量加载失败，请重试。";
     empty.hidden = false;
     empty.textContent = `无法读取该基金走势：${error.message}`;
   });
@@ -241,56 +245,113 @@ function shanghaiDate(value) {
   return `${byType.year}-${byType.month}-${byType.day}`;
 }
 
-function filterPointsByRange(points) {
-  if (state.selectedRange === "all") return points;
-  const dayCount = Number(state.selectedRange);
-  const availableDates = [...new Set(points.map(point => point.tradingDate))];
-  const includedDates = new Set(availableDates.slice(-dayCount));
-  return points.filter(point => includedDates.has(point.tradingDate));
+function chartDates(points, fund) {
+  // Calendar includes sessions without premium snapshots or symbol volume bars.
+  const dates = [...new Set([
+    ...(state.index.volume_trading_dates || []),
+    ...points.map(point => point.tradingDate),
+    ...(fund?.daily_volume || []).map(row => row[0]),
+  ])].sort();
+  return state.selectedRange === "all" ? dates : dates.slice(-Number(state.selectedRange));
 }
 
-function drawChart(points, current, fund) {
-  const distinctDays = new Set(points.map(point => point.tradingDate)).size;
+function inWan(value) {
+  return (value / 1e4).toLocaleString("zh-CN", { minimumFractionDigits: 2, maximumFractionDigits: 4 });
+}
+
+function compactUnits(value) {
+  return (value / 1e4).toLocaleString("zh-CN", { maximumFractionDigits: 2 });
+}
+
+function volumeDescription(day, row) {
+  return row
+    ? `${day} · 成交量 ${inWan(row[1])} 万份 · 成交额 ${inWan(row[2])} 万元`
+    : `${day} · 未返回日成交记录（不代表成交量为零）`;
+}
+
+function drawChart(allPoints, current, fund) {
+  const days = chartDates(allPoints, fund);
+  const included = new Set(days);
+  const points = allPoints.filter(point => included.has(point.tradingDate));
+  const volumes = new Map((fund?.daily_volume || []).map(row => [row[0], row]));
+  const rows = days.map(day => volumes.get(day)).filter(Boolean);
   const rangeLabel = state.selectedRange === "all" ? "全部历史" : state.selectedRange === "1" ? "当日" : `最近 ${state.selectedRange} 个交易日`;
-  const dateSpan = points.length ? `${points[0].tradingDate} 至 ${points.at(-1).tradingDate}` : "";
-  $("#chart-range").textContent = points.length
-    ? `${rangeLabel} · ${distinctDays} 个交易日 · ${points.length} 个快照 · ${dateSpan}`
-    : `${rangeLabel} · 暂无历史快照`;
+  $("#chart-range").textContent = days.length
+    ? `${rangeLabel} · ${days.length} 个交易日 · ${points.length} 个溢价快照 · ${days[0]} 至 ${days.at(-1)}`
+    : `${rangeLabel} · 暂无历史记录`;
   const intradayDays = fund?.intraday_retention_days || state.index?.intraday_retention_days || 60;
-  $("#history-note").textContent = `最近 ${intradayDays} 个交易日保留每 30 分钟快照；更早历史按每日最后一个快照压缩保存。`;
+  $("#history-note").textContent = `溢价率：最近 ${intradayDays} 个交易日保留每 30 分钟快照；更早历史按每日最后一个快照压缩保存。`;
+  const checked = fund?.volume_checked_through;
+  $("#volume-note").textContent = checked
+    ? `成交量来源：通达信 · 已查询至 ${checked} · 仅收盘后更新（北京时间 16:10，18:10 补跑）。当前范围 ${rows.length}/${days.length} 天有记录；缺失以虚线标记，不填零。`
+    : "该基金暂无日成交量数据；成交量仅在收盘后更新。";
+  const latestDay = days.at(-1);
+  $("#volume-detail").textContent = latestDay ? volumeDescription(latestDay, volumes.get(latestDay)) : "暂无日成交量数据";
+  $("#volume-body").innerHTML = [...days].reverse().map(day => {
+    const row = volumes.get(day);
+    return `<tr><td>${day}</td><td class="num">${row ? inWan(row[1]) : "未返回记录"}</td><td class="num">${row ? inWan(row[2]) : "—"}</td></tr>`;
+  }).join("");
 
   const svg = $("#trend-chart");
   const empty = $("#chart-empty");
-  if (points.length < 2) {
+  if (!days.length) {
     svg.innerHTML = "";
     empty.hidden = false;
-    empty.textContent = points.length ? "当前范围只有一个快照，暂时无法形成走势线。" : "当前范围暂无历史快照。";
+    empty.textContent = "当前范围暂无历史数据。";
     return;
   }
   empty.hidden = true;
-  const width = Math.max(620, $("#chart-wrap").clientWidth);
-  const height = 270;
-  const margin = { top: 20, right: 22, bottom: 34, left: 52 };
+  const width = Math.max(560, $("#chart-wrap").clientWidth);
+  const height = 400;
+  const margin = { top: 25, right: 24, left: 66 };
+  const premiumBottom = 228, volumeTop = 282, volumeBottom = 366;
   const innerW = width - margin.left - margin.right;
-  const innerH = height - margin.top - margin.bottom;
+  const dayWidth = innerW / days.length;
+  const dayIndices = new Map(days.map((day, index) => [day, index]));
+  const center = day => margin.left + (dayIndices.get(day) + .5) * dayWidth;
+  // Within each equal-width trading session, position only actual snapshots.
+  const groups = new Map(days.map(day => [day, points.filter(point => point.tradingDate === day)]));
+  const x = point => {
+    const group = groups.get(point.tradingDate);
+    return center(point.tradingDate) + (group.length > 1 ? (group.indexOf(point) / (group.length - 1) - .5) * dayWidth * .75 : 0);
+  };
   let min = Math.min(0, ...points.map(point => point.value));
   let max = Math.max(0, ...points.map(point => point.value));
   const pad = Math.max((max - min) * .14, .5);
   min -= pad; max += pad;
-  const x = index => margin.left + (points.length === 1 ? innerW / 2 : index * innerW / (points.length - 1));
-  const y = value => margin.top + (max - value) * innerH / (max - min);
-  const path = points.map((point, index) => `${index ? "L" : "M"}${x(index).toFixed(1)},${y(point.value).toFixed(1)}`).join(" ");
-  const area = `${path} L${x(points.length - 1)},${height - margin.bottom} L${x(0)},${height - margin.bottom} Z`;
+  const y = value => margin.top + (max - value) * (premiumBottom - margin.top) / (max - min);
   const ticks = Array.from({ length: 5 }, (_, index) => min + (max - min) * index / 4);
-  const labelIndices = [...new Set([0, Math.floor((points.length - 1) / 2), points.length - 1])];
+  const maxVolume = Math.max(1, ...rows.map(row => row[1]));
+  const vy = value => volumeBottom - value / maxVolume * (volumeBottom - volumeTop);
+  const barWidth = Math.max(1, Math.min(42, dayWidth * .55));
+  const labelIndices = [...new Set([0, Math.floor((days.length - 1) / 2), days.length - 1])];
+  const path = points.map((point, index) => {
+    const gap = index && dayIndices.get(point.tradingDate) - dayIndices.get(points[index - 1].tradingDate) > 1;
+    return `${!index || gap ? "M" : "L"}${x(point).toFixed(1)},${y(point.value).toFixed(1)}`;
+  }).join(" ");
+  const lastPoint = points.at(-1);
   svg.setAttribute("viewBox", `0 0 ${width} ${height}`);
   svg.innerHTML = `
-    <defs><linearGradient id="area-gradient" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffa800" stop-opacity=".24"/><stop offset="1" stop-color="#ffa800" stop-opacity="0"/></linearGradient></defs>
-    ${ticks.map(value => `<line class="chart-grid ${Math.abs(value) < .001 ? "chart-zero" : ""}" x1="${margin.left}" x2="${width - margin.right}" y1="${y(value)}" y2="${y(value)}"/><text class="chart-label" x="${margin.left - 9}" y="${y(value) + 4}" text-anchor="end">${value.toFixed(1)}%</text>`).join("")}
-    <path class="chart-area" d="${area}"/><path class="chart-line" d="${path}"/>
-    ${points.length <= 120 ? points.map((point, index) => `<circle class="chart-point" cx="${x(index)}" cy="${y(point.value)}" r="4"><title>${point.date.toLocaleString("zh-CN", { timeZone: "Asia/Shanghai" })} ${fmtPct(point.value)}</title></circle>`).join("") : ""}
-    ${labelIndices.map(index => `<text class="chart-label" x="${x(index)}" y="${height - 9}" text-anchor="${index === 0 ? "start" : index === points.length - 1 ? "end" : "middle"}">${points[index].date.toLocaleString("zh-CN", { month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit", timeZone: "Asia/Shanghai", hour12: false })}</text>`).join("")}
-    <text class="chart-value" x="${x(points.length - 1) - 7}" y="${Math.max(14, y(points.at(-1).value) - 10)}" text-anchor="end">${fmtPct(points.at(-1).value)}</text>`;
+    <text class="chart-label" x="${margin.left}" y="14">溢价率（%）</text>
+    ${ticks.map(value => `<line class="chart-grid" x1="${margin.left}" x2="${width - margin.right}" y1="${y(value)}" y2="${y(value)}"/><text class="chart-label" x="${margin.left - 9}" y="${y(value) + 4}" text-anchor="end">${value.toFixed(1)}%</text>`).join("")}
+    ${path ? `<path class="chart-line" d="${path}"/>` : `<text class="chart-label" x="${width / 2}" y="120" text-anchor="middle">当前范围暂无溢价快照</text>`}
+    ${points.length <= 120 ? points.map(point => `<circle class="chart-point" cx="${x(point)}" cy="${y(point.value)}" r="3.5"><title>${point.date.toLocaleString("zh-CN", { timeZone: "Asia/Shanghai" })} ${fmtPct(point.value)}</title></circle>`).join("") : ""}
+    ${lastPoint ? `<text class="chart-value" x="${x(lastPoint) - 7}" y="${Math.max(30, y(lastPoint.value) - 10)}" text-anchor="end">${fmtPct(lastPoint.value)}</text>` : ""}
+    <text class="chart-label" x="${margin.left}" y="266">日成交量（万份）</text>
+    ${[0, maxVolume / 2, maxVolume].map(value => `<line class="chart-grid" x1="${margin.left}" x2="${width - margin.right}" y1="${vy(value)}" y2="${vy(value)}"/><text class="chart-label" x="${margin.left - 9}" y="${vy(value) + 4}" text-anchor="end">${compactUnits(value)}</text>`).join("")}
+    ${days.map(day => {
+      const row = volumes.get(day);
+      return `<g class="volume-day" data-day="${day}" tabindex="0" aria-label="${escapeHtml(volumeDescription(day, row))}"><title>${escapeHtml(volumeDescription(day, row))}</title>
+      ${row ? `<rect class="volume-bar" x="${center(day) - barWidth / 2}" y="${vy(row[1])}" width="${barWidth}" height="${volumeBottom - vy(row[1])}" rx="2"/>` : `<line class="volume-missing" x1="${center(day) - barWidth / 2}" x2="${center(day) + barWidth / 2}" y1="${volumeBottom - 2}" y2="${volumeBottom - 2}"/>`}
+      <rect class="volume-hit" x="${center(day) - dayWidth / 2}" y="${volumeTop}" width="${dayWidth}" height="${volumeBottom - volumeTop + 3}"/></g>`;
+    }).join("")}
+    ${labelIndices.map(index => `<text class="chart-label" x="${center(days[index])}" y="393" text-anchor="${index === 0 ? "start" : index === days.length - 1 ? "end" : "middle"}">${days[index].slice(5).replace("-", "/")}</text>`).join("")}`;
+  svg.querySelectorAll(".volume-day").forEach(group => {
+    const show = () => { $("#volume-detail").textContent = volumeDescription(group.dataset.day, volumes.get(group.dataset.day)); };
+    group.addEventListener("pointerenter", show);
+    group.addEventListener("click", show);
+    group.addEventListener("focus", show);
+  });
 }
 
 function escapeHtml(value) {

@@ -39,6 +39,8 @@ def main() -> int:
         else {"display_date": None, "coverage": 0, "funds": {}}
     )
     all_dates = index.get("dates", [])
+    volume_path = args.data_dir / "volume" / "latest.json"
+    volume = json.loads(volume_path.read_text(encoding="utf-8")) if volume_path.exists() else {}
     intraday_dates = index.get("intraday_dates", all_dates[-60:])
     funds: dict[str, dict[str, object]] = {}
 
@@ -72,6 +74,8 @@ def main() -> int:
                 fund["points"].append([captured_at, premium])
 
     generated_at = datetime.now(CHINA_TZ).isoformat(timespec="seconds")
+    for row in latest.get("rows", []):
+        funds.setdefault(row["code"], {"name": row["name"], "category": row.get("category", "other"), "points": []})
     args.site_data_dir.mkdir(parents=True, exist_ok=True)
     trends_dir = args.site_data_dir / "trends"
     if trends_dir.exists():
@@ -92,6 +96,8 @@ def main() -> int:
                 "name": fund["name"],
                 "category": fund["category"],
                 "points": fund["points"],
+                "daily_volume": volume.get("funds", {}).get(code, {}).get("points", []),
+                "volume_checked_through": volume.get("funds", {}).get(code, {}).get("checked_through"),
                 "intraday_retention_days": index.get("intraday_retention_days", 60),
                 "archive_granularity": index.get("archive_granularity", "daily_close"),
             },
@@ -108,6 +114,10 @@ def main() -> int:
             "archive_granularity": index.get("archive_granularity", "daily_close"),
             "fund_count": len(funds),
             "source_accuracy_coverage": source_accuracy.get("coverage", 0),
+            "volume_source": volume.get("source"),
+            "volume_checked_through": volume.get("checked_through"),
+            "volume_trading_dates": volume.get("trading_dates", []),
+            "volume_fund_count": volume.get("fund_count", 0),
         },
     )
     shutil.copyfile(index_path, args.site_data_dir / "archive-index.json")

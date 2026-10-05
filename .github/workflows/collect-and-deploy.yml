@@ -7,6 +7,14 @@ on:
         description: Collect even when the run is outside a configured market slot
         type: boolean
         default: true
+      collect_volume:
+        description: Update completed daily volume from TDX
+        type: boolean
+        default: true
+      refresh_volume_history:
+        description: Re-fetch recent volume history (diagnostics or corrections)
+        type: boolean
+        default: false
   schedule:
     # Beijing time: 09:35, 10:05, 10:35, 11:05, 11:35.
     - cron: "35 1 * * 1-5"
@@ -20,6 +28,9 @@ on:
     - cron: "5 6 * * 1-5"
     - cron: "35 6 * * 1-5"
     - cron: "5 7 * * 1-5"
+    # Daily volume: 16:10 Beijing, with an idempotent catch-up at 18:10.
+    - cron: "10 8 * * 1-5"
+    - cron: "10 10 * * 1-5"
 
 permissions:
   contents: write
@@ -33,6 +44,7 @@ concurrency:
 jobs:
   collect:
     runs-on: ubuntu-latest
+    timeout-minutes: 25
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -47,7 +59,13 @@ jobs:
       - name: Configure Pages
         uses: actions/configure-pages@v6
 
+      - name: Test collection and chart semantics
+        run: |
+          python3 -m unittest discover -s tests -v
+          node --test tests/chart.test.cjs
+
       - name: Collect current snapshot
+        if: github.event.schedule != '10 8 * * 1-5' && github.event.schedule != '10 10 * * 1-5'
         env:
           MANUAL_FORCE: ${{ inputs.force }}
           EVENT_NAME: ${{ github.event_name }}
@@ -58,18 +76,29 @@ jobs:
             python3 collect_premium_api.py
           fi
 
+      - name: Collect completed daily volume
+        if: github.event.schedule == '10 8 * * 1-5' || github.event.schedule == '10 10 * * 1-5' || (github.event_name == 'workflow_dispatch' && inputs.collect_volume)
+        env:
+          REFRESH_VOLUME: ${{ inputs.refresh_volume_history }}
+        run: |
+          if [[ "$REFRESH_VOLUME" == "true" ]]; then
+            python3 collect_daily_volume.py --refresh-history
+          else
+            python3 collect_daily_volume.py
+          fi
+
       - name: Build dashboard data
         run: python3 build_dashboard_data.py
 
       - name: Commit new history
         run: |
-          if git diff --quiet -- data; then
-            echo "No new market snapshot to commit."
+          git add data
+          if git diff --staged --quiet; then
+            echo "No new premium or daily volume data to commit."
           else
             git config user.name "github-actions[bot]"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git add data
-            git commit -m "data: collect LOF premium snapshot"
+            git commit -m "data: update LOF premium and daily volume"
             git push
           fi
 
